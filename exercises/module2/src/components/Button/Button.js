@@ -1,3 +1,7 @@
-const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
-
+const Button = ({ onClick, text, delta}) => {
+    
+     return <button data-delta={delta} onClick={onClick}>{text}</button>;
+}
+    
 export default Button
+
