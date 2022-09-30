@@ -1,12 +1,13 @@
-import { useState } from 'react'
+
 import Display from '../Display/Display'
 import Button from '../Button/Button'
+import UseLocalStorage from 'hooks/UseLocalStorage'
+
 const App = () => {
-  const [ counter, setCounter ] = useState(JSON.parse(localStorage.getItem("counter")))
+  const [ counter, setCounter ] = UseLocalStorage("counter", 0);
 
   const changeCount = (delta) => {
     setCounter(counter + parseInt(delta, 10))
-    localStorage.setItem("counter", JSON.stringify(counter + parseInt(delta, 10)));
   }
     
   
