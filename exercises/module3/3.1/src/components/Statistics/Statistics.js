@@ -11,12 +11,26 @@ const Statistics = ({ good, neutral, bad }) => {
         }else{
             return (<div>
                 <h2>Statistics</h2>
-                <StatisticLine text="Good" value={good} ></StatisticLine>
-                <StatisticLine text="Neutral" value={neutral} ></StatisticLine>
-                <StatisticLine text="Bad" value={bad} ></StatisticLine>
-                <StatisticLine text="All" value={good + neutral + bad} ></StatisticLine>
-                <StatisticLine text="Average" value={(good - bad) / (good + neutral + bad)} ></StatisticLine>
-                <StatisticLine text="Positive" value={(good / (good + neutral + bad)) * 100} ></StatisticLine>
+                <table>
+                    <tr>
+                        <td><StatisticLine text="Good" value={good} ></StatisticLine></td>
+                    </tr>
+                    <tr>
+                        <td><StatisticLine text="Neutral" value={neutral} ></StatisticLine></td>
+                    </tr>
+                    <tr>
+                        <td><StatisticLine text="Bad" value={bad} ></StatisticLine></td>
+                    </tr>
+                    <tr>
+                        <td><StatisticLine text="All" value={good + neutral + bad} ></StatisticLine></td>
+                    </tr>
+                    <tr>
+                        <td><StatisticLine text="Average" value={(good - bad) / (good + neutral + bad)} ></StatisticLine></td>
+                    </tr>
+                    <tr>
+                        <td><StatisticLine text="Positive" value={(good / (good + neutral + bad)) * 100} ></StatisticLine></td>
+                    </tr>
+                    </table>
             </div>);
         }
     };
