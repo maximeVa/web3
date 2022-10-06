@@ -1,6 +1,5 @@
 
 const Loading = () => {
-    let stateLoading = true;
     
     return (
       <div>
