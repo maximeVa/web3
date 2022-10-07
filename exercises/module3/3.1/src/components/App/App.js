@@ -9,7 +9,7 @@ const App = () => {
   const [neutral, setNeutral] = useState(0);
   const [bad, setBad] = useState(0);
 
-  const [time, setTime] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const changeCount = (delta) => {
     if (delta == 1) {
@@ -26,11 +26,11 @@ const App = () => {
     return changeCount(e.target.dataset.delta);
   };
 
-  //dès que 3 secondes sont passées, on incrémente time afin de refresh la page
+  //dès que 3 secondes sont passées, on incrémente loadout afin de refresh la page
   //et grâce au if, on affichera cette fois ci la bonne page
-  setTimeout(function(){ setTime(false)}, 3000);
+  setTimeout(function(){ setLoading(false)}, 3000);
 
-  if (time == true) {
+  if (loading == true) {
     return <div><Loading></Loading></div>;
   } else {
     return (

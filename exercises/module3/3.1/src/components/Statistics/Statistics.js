@@ -3,7 +3,7 @@ import StatisticLine from "components/StatisticLine/StatisticLine";
 const Statistics = ({ good, neutral, bad }) => {
 
     const display = () => {
-        if(good == 0 && neutral == 0 && bad == 0){
+        if(good + neutral + bad == 0){
             return (<div>
                 <h2>Statistics</h2>
                 <p>No feedback given</p>
