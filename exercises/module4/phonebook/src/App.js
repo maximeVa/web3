@@ -2,27 +2,35 @@ import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
+    { name: 'Arto Hellas', number: '040-123456' },
   ]) 
-  const [newName, setNewName] = useState('')
+  const [newValues, setnewValues] = useState({
+    name: '',
+    number: ''});
 
   const addPerson = (event) => {
     event.preventDefault()
     const personObject = {
-      name: newName
+      name: newValues['name'],
+      number: newValues['number']
     }
     
-    if(persons.find(person => JSON.stringify(person.name) === JSON.stringify(newName))) {
-      alert(`${newName} is already added to phonebook`)
+    if(persons.find(person => JSON.stringify(person.name) === JSON.stringify(newValues['name']))) {
+      alert(`${newValues['name']} is already added to phonebook`)
     }else {  
       setPersons(persons.concat(personObject))
-      setNewName('') 
+      setnewValues({name : '', number : ''}) 
     }
   }
 
   const handlePersonChange = (event) => {
     console.log(event.target.value)
-    setNewName(event.target.value)
+    setnewValues({...newValues, name : event.target.value})
+  }
+  
+  const handleNumberChange = (event) => {
+    console.log(event.target.value)
+    setnewValues({...newValues, number : event.target.value})
   }
 
   return (
@@ -30,7 +38,8 @@ const App = () => {
       <h2>Phonebook</h2>
       <form onSubmit={addPerson}>
         <div>
-          name: <input value={newName} onChange={handlePersonChange}/>
+          name: <input value={newValues['name']} onChange={handlePersonChange}/>
+          number: <input value={newValues['number']} onChange={handleNumberChange}/>
         </div>
         <div>
           <button type="submit">add</button>
@@ -40,7 +49,7 @@ const App = () => {
       ...
       <div>
         {persons.map(person =>
-          <h5 key={person.name}> {person.name}</h5>
+          <h5 key={person.name}> {person.name} {person.number}</h5>
         )}
       </div>
     </div>
