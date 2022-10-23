@@ -1,69 +1,45 @@
 import React, { useState } from "react";
+import { v4 as uuid } from 'uuid';
 
 const Context = React.createContext(null);
 
-// const ProviderWrapper = (props) => {
-//   const [count, setLanguage] = useState("fr");
-//   const pickLanguage = (newLanguage) => {
-//     if (newLanguage !== "fr" && newLanguage !== "en")
-//       throw "Invalid language selected : " + newLanguage;
-//     setLanguage(newLanguage);
-//   };
-
 const ProviderWrapper = (props) => {
-  const [opinion, setOpinion] = useState(0);
-  const [all, setAll] = useState(0);
+  const [opinions, setOpinions] = useState([]);
 
-  const increaseOpinion = (opinion) => {
-    setOpinion(opinion + 1);
-    setAll(all + 1);
+  const increaseOpinion = (opinion) => {    
+    const id = opinion.target.value; // recup l'id
+    const index = opinions.findIndex(opinion => opinion.id === id); // recup l'index
+    const vote = opinions[index].vote; // recup le vote
+    console.log("id = " + id);
+    console.log("index = " + index);
+    console.log("vote = " + vote);
+    
+    let newArr = [...opinions]; // copie le tableau
+    newArr[index].vote = vote + 1; // modifie le vote
+    setOpinions(newArr); // met a jour le tableau
   };
 
-  const resetAll = () => {
-    setOpinion(0);
-    setAll(0);
-  };
+  const addOpinion = (event) => {
+    //event.preventDefault() retirer car si laisse ne fonctionne pas.. sait pas pq
+    const opinionObject = {
+      id: uuid(),
+      name: event,
+      vote: 1
+    }
+    setOpinions(opinions.concat(opinionObject)) 
+  }
 
   return (
     <Context.Provider
       value={{
-        opinion,
-        all,
+        opinions,
         increaseOpinion,
-        resetAll,
+        addOpinion,
       }}
     >
       {props.children}
     </Context.Provider>
   );
-}
 
-  
-  };
-
-  return (
-    <Context.Provider
-      value={{
-        good,
-        ok,
-        bad,
-        all,
-        increaseGood,
-        increaseOk,
-        increaseBad,
-        resetAll,
-      }}
-    >
-      {props.children}
-    </Context.Provider>
-  );
-}
-  // const exposedValue = {
-  //   language,
-  //   pickLanguage,
-  // };
-
-  // return (
-  //   <Context.Provider value={exposedValue}>{props.children}</Context.Provider>
-  // );
+    }
 export { Context, ProviderWrapper };
